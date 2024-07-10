@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+const http = require("http");
+const app = require("../app");
+const { PORT } = require("../config/env.config");
+
+const server = http.createServer(app);
+server.listen(PORT);
+
+// Graceful Shutdown
+server.on("close", () => {
+  console.log("Server closing");
+  process.exit(0);
+});
+
+
+process.on('SIGKILL' , (s)=>{
+    console.log(s);
+})
